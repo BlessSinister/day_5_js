@@ -1,14 +1,14 @@
 class FetchReq {
   getAll(url) {
     fetch(url)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((json) => console.log(json))
   }
   async getTaskById(url, id) {
     try {
       console.log(`${url}${id}`)
-      const response = await fetch(`${url}${id}`)
-      const json = await response.json()
+      const res = await fetch(`${url}${id}`)
+      const json = await res.json()
       console.log(JSON.stringify(json))
     } catch (error) {
       console.error(error)
@@ -16,7 +16,7 @@ class FetchReq {
   }
   async post(url) {
     try {
-      const response = await fetch(url, {
+      const res = await fetch(url, {
         method: 'POST',
         body: JSON.stringify({
           name: 'Сделать ДЗ',
@@ -28,14 +28,42 @@ class FetchReq {
           'Content-Type': 'application/json',
         },
       })
-      const json = await response.json()
+      const json = await res.json()
       console.log(JSON.stringify(json))
     } catch (error) {
       console.error(error)
     }
   }
+  async patch(url, id, body) {
+    try {
+      const res = await fetch(`${url}${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      return await res.json()
+    } catch (err) {
+      console.error('Fetch PATCH error:', err)
+    }
+  }
+
+  async delete(url, id) {
+    try {
+      const res = await fetch(`${url}${id}`, { method: 'DELETE' })
+      console.log('delete +++')
+      return await res.json()
+    } catch (err) {
+      console.error('Fetch DELETE error:', err)
+    }
+  }
 }
 
 let x = new FetchReq()
-x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '4')
-// x.post('https://tasks-service-maks1394.amvera.io/tasks') // создал задачку с Id:4
+// x.getAll('https://tasks-service-maks1394.amvera.io/tasks/')
+// x.post('https://tasks-service-maks1394.amvera.io/tasks') // создал задачку с Id:5
+x.patch('https://tasks-service-maks1394.amvera.io/tasks', '5', {
+  isCompleted: true,
+})
+x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '5')
+
+// x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '4')

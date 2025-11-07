@@ -35,25 +35,26 @@ class FetchReq {
     }
   }
   async patch(url, id, body) {
+    console.log(`${url}${id}`)
     try {
       const res = await fetch(`${url}${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      return await res.json()
+      const json = await res.json()
+      console.log(json)
     } catch (err) {
-      console.error('Fetch PATCH error:', err)
+      console.error(err)
     }
   }
 
   async delete(url, id) {
     try {
       const res = await fetch(`${url}${id}`, { method: 'DELETE' })
-      console.log('delete +++')
       return await res.json()
     } catch (err) {
-      console.error('Fetch DELETE error:', err)
+      console.error(err)
     }
   }
 }
@@ -61,9 +62,9 @@ class FetchReq {
 let x = new FetchReq()
 // x.getAll('https://tasks-service-maks1394.amvera.io/tasks/')
 // x.post('https://tasks-service-maks1394.amvera.io/tasks') // создал задачку с Id:5
-x.patch('https://tasks-service-maks1394.amvera.io/tasks', '5', {
-  isCompleted: true,
-})
-x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '5')
+// x.patch('https://tasks-service-maks1394.amvera.io/tasks/', '5', {
+//   name: 'Hell Yeah',
+// })
+// x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '5')
 
 // x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '4')

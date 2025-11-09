@@ -55,20 +55,6 @@ class FetchReq {
 }
 
 let x = new FetchReq()
-// x.getAll('https://tasks-service-maks1394.amvera.io/tasks/')
-// x.post('https://tasks-service-maks1394.amvera.io/tasks',   // {
-//   name: 'Сделать ДЗ',
-//   info: 'Написать 2 класса',
-//   isImportant: true,
-//   isCompleted: false,
-// }) // создал задачку с Id:5
-// x.patch('https://tasks-service-maks1394.amvera.io/tasks/', '5', {
-//   name: 'Hell Yeah',
-// })
-// x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '5')
-
-// x.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '4')
-
 class XMLReq {
   getAll(url) {
     const req = new XMLHttpRequest()
@@ -128,11 +114,6 @@ class XMLReq {
     req.send()
   }
 }
-// let y = new XMLReq()
-// y.delete('https://tasks-service-maks1394.amvera.io/tasks/', '136', {
-//   name: 'Не делать ДЗ',
-// })
-
 class ReqFasad {
   constructor(api) {
     this.api = api
@@ -156,15 +137,3 @@ class ReqFasad {
 }
 // ===============================
 let fasad = new ReqFasad(new FetchReq())
-
-fasad.getAll('https://tasks-service-maks1394.amvera.io/tasks/')
-fasad.post('https://tasks-service-maks1394.amvera.io/tasks/', {
-  name: 'Кто я? а может быть ты?',
-  info: 'Написать 2 класса',
-  isImportant: true,
-  isCompleted: false,
-})
-// fasad.getTaskById('https://tasks-service-maks1394.amvera.io/tasks/', '144')
-// fasad.patch('https://tasks-service-maks1394.amvera.io/tasks/', '144', {
-//   name: 'Нет ты',
-// })
